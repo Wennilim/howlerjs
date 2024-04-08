@@ -4,7 +4,11 @@ import { useClickSound } from "../hooks/useClickSound";
 import { useState } from "react";
 
 const ButtonPlayer = () => {
-  const { play, pause, isPlaying } = useClickSound({soundSrc: "/sound/song5.mp3", isLoop: false});
+  const { play, pause, isPlaying } = useClickSound({
+    soundSrc: "/sound/song5.mp3",
+    isLoop: false,
+    volume: 0.5,
+  });
   // const { play } = useClickSound();
 
   // const [soundOn, setSoundOn] = useState(false);

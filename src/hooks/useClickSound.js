@@ -44,33 +44,39 @@
 
 // export { useClickSound };
 
+
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Howl } from "howler";
 
 let clickSoundInstance = null;
 
-const createClickSoundInstance = async (src, loop) => {
+const createClickSoundInstance = async (src, loop, volume) => {
   if (!clickSoundInstance) {
     clickSoundInstance = new Howl({
       src: src,
       loop: loop,
-      volume: 0.5,
+      volume: volume,
     });
     await clickSoundInstance.load();
   }
   return clickSoundInstance;
 };
 
-const useClickSound = ({ soundSrc, isLoop = false }) => {
+const useClickSound = ({ soundSrc, isLoop = false, volume = 0.5 }) => {
   const clickSoundRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const initializeClickSound = async () => {
-      clickSoundRef.current = await createClickSoundInstance(soundSrc, isLoop);
+      clickSoundRef.current = await createClickSoundInstance(
+        soundSrc,
+        isLoop,
+        volume
+      );
     };
     initializeClickSound();
-  }, [soundSrc, isLoop]);
+  }, [soundSrc, isLoop, volume]);
 
   const play = useCallback(() => {
     const clickSound = clickSoundRef.current;
