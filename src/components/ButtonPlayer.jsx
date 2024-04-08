@@ -4,19 +4,25 @@ import { useClickSound } from "../hooks/useClickSound";
 import { useState } from "react";
 
 const ButtonPlayer = () => {
-  const { play } = useClickSound();
-  const [soundOn, setSoundOn] = useState(false);
+  const { play, pause, isPlaying } = useClickSound("/sound/song2.mp3");
+  // const { play } = useClickSound();
+
+  // const [soundOn, setSoundOn] = useState(false);
   return (
     <div className="flex flex-col gap-4">
       <h1>Simple button with sound effect</h1>
       <button
-      className="flex justify-center items-center"
+        className="flex justify-center items-center"
         onClick={() => {
-          setSoundOn(!soundOn); 
-          play();
+          // setSoundOn(!soundOn);
+          if (isPlaying) {
+            pause();
+          } else {
+            play();
+          }
         }}
       >
-        {soundOn ? (
+        {isPlaying ? (
           <HiMiniSpeakerWave className="w-10 h-10" />
         ) : (
           <HiMiniSpeakerXMark className="w-10 h-10" />

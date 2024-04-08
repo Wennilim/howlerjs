@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="flex justify-center items-center flex-col h-screen gap-4 bg-[url('/img/bg2.jpg')] bg-center">
       {/* <Sprite /> */}
-      {/* <ButtonPlayer /> */}
-      <MusicPlayer src={data.map((song) => song.url)} />
+      <ButtonPlayer />
+      {/* <MusicPlayer src={data.map((song) => song.url)} /> */}
     </div>
   );
 }
