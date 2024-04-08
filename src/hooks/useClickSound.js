@@ -49,11 +49,11 @@ import { Howl } from "howler";
 
 let clickSoundInstance = null;
 
-const createClickSoundInstance = async (src) => {
+const createClickSoundInstance = async (src, loop) => {
   if (!clickSoundInstance) {
     clickSoundInstance = new Howl({
       src: src,
-      loop: false,
+      loop: loop,
       volume: 0.5,
     });
     await clickSoundInstance.load();
@@ -61,16 +61,16 @@ const createClickSoundInstance = async (src) => {
   return clickSoundInstance;
 };
 
-const useClickSound = (soundSrc) => {
+const useClickSound = ({ soundSrc, isLoop = false }) => {
   const clickSoundRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const initializeClickSound = async () => {
-      clickSoundRef.current = await createClickSoundInstance(soundSrc);
+      clickSoundRef.current = await createClickSoundInstance(soundSrc, isLoop);
     };
     initializeClickSound();
-  }, [soundSrc]);
+  }, [soundSrc, isLoop]);
 
   const play = useCallback(() => {
     const clickSound = clickSoundRef.current;
